@@ -1,25 +1,30 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Upload, FileText, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload, FileText, X, CheckCircle, AlertCircle, Shield, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { DocumentAIService, PassportData, VisaData } from '@/services/document-ai.service';
+import { FraudDetectionService, RiskProfile } from '@/services/fraud-detection.service';
 
 interface DocumentUploadProps {
-  onDocumentProcessed: (data: any) => void;
+  onDocumentProcessed: (data: any, riskProfile?: RiskProfile) => void;
   documentType: 'passport' | 'visa' | 'driver-license';
   maxFileSize?: number; // in MB
   acceptedFormats?: string[];
+  enableFraudDetection?: boolean;
 }
 
 interface UploadState {
   file: File | null;
   progress: number;
-  status: 'idle' | 'uploading' | 'processing' | 'completed' | 'error';
+  status: 'idle' | 'uploading' | 'processing' | 'analyzing' | 'completed' | 'error';
   error: string | null;
-  extractedData: any;
+  extractedData: PassportData | VisaData | null;
+  riskProfile: RiskProfile | null;
 }
 
 export function DocumentUpload({
@@ -91,12 +96,31 @@ export function DocumentUpload({
 
       setUploadState(prev => ({ ...prev, status: 'processing', progress: 90 }));
 
-      // Here you would call the Document AI service
-      // For now, we'll simulate the processing
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Initialize services
+      const documentAIService = new DocumentAIService();
+      const fraudDetectionService = new FraudDetectionService();
 
-      // Mock extracted data (replace with actual API call)
-      const mockData = getMockExtractedData(documentType);
+      let extractedData: PassportData | VisaData;
+
+      // Process document based on type
+      if (documentType === 'passport') {
+        extractedData = await documentAIService.extractPassportData(buffer);
+      } else if (documentType === 'visa') {
+        extractedData = await documentAIService.extractVisaData(buffer);
+      } else {
+        throw new Error('Unsupported document type');
+      }
+
+      setUploadState(prev => ({ ...prev, status: 'analyzing', progress: 95 }));
+
+      // Perform fraud detection if enabled
+      let riskProfile: RiskProfile | undefined;
+      if (enableFraudDetection) {
+        riskProfile = await fraudDetectionService.assessApplicationRisk(
+          documentType === 'passport' ? extractedData as PassportData : undefined,
+          documentType === 'visa' ? extractedData as VisaData : undefined
+        );
+      }
 
       clearInterval(progressInterval);
 
@@ -104,10 +128,11 @@ export function DocumentUpload({
         ...prev,
         status: 'completed',
         progress: 100,
-        extractedData: mockData
+        extractedData,
+        riskProfile
       }));
 
-      onDocumentProcessed(mockData);
+      onDocumentProcessed(extractedData, riskProfile);
 
     } catch (error) {
       setUploadState(prev => ({
