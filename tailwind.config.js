@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -11,6 +13,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        lightBlue: colors.sky,
+        warmGray: colors.stone,
+        trueGray: colors.neutral,
+        coolGray: colors.gray,
+        blueGray: colors.slate,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
