@@ -1,0 +1,323 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Diamond Visa Renk Paleti */
+    /* Arka Plan: Saten Beyazı */
+    --background: 50 33% 97%;
+    --foreground: 195 8% 20%;
+
+    /* Kartlar ve Popover */
+    --card: 0 0% 100%;
+    --card-foreground: 195 8% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 8% 20%;
+
+    /* Ana Renk: Diamond Mavi */
+    --primary: 207 92% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    /* İkincil Renk */
+    --secondary: 50 20% 94%;
+    --secondary-foreground: 195 8% 20%;
+
+    /* Muted: Sisli Tonlar */
+    --muted: 50 15% 92%;
+    --muted-foreground: 195 7% 42%;
+
+    /* Accent */
+    --accent: 207 92% 46%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Başarı Rengi */
+    --success: 168 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Uyarı Rengi */
+    --warning: 45 93% 47%;
+    --warning-foreground: 195 8% 20%;
+
+    /* Border ve Input */
+    --border: 50 15% 88%;
+    --input: 50 15% 88%;
+    --ring: 207 92% 46%;
+    --radius: 0.5rem;
+
+    /* Chart Colors */
+    --chart-1: 207 92% 46%;
+    --chart-2: 168 76% 36%;
+    --chart-3: 45 93% 47%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Diamond Visa Özel Renkler */
+    --diamond-blue: 207 92% 46%;
+    --diamond-gold: 45 93% 47%;
+    --satin-white: 50 33% 97%;
+    --foggy-black: 195 7% 42%;
+    --dark-gray: 195 8% 20%;
+
+    /* Menu colors */
+    --menu-text: 195 8% 20%;
+    --menu-text-hover: 207 92% 46%;
+    --menu-icon: 195 7% 42%;
+    --menu-icon-hover: 207 92% 46%;
+    --menu-section-label: 195 7% 42%;
+  }
+
+  .dark {
+    /* Dark Mode - Diamond Visa */
+    --background: 220 15% 10%;
+    --foreground: 50 20% 95%;
+
+    --card: 220 15% 13%;
+    --card-foreground: 50 20% 95%;
+    --popover: 220 15% 13%;
+    --popover-foreground: 50 20% 95%;
+
+    --primary: 207 92% 56%;
+    --primary-foreground: 220 15% 10%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 50 20% 95%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 207 92% 56%;
+    --accent-foreground: 220 15% 10%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 50 20% 95%;
+
+    --success: 168 76% 46%;
+    --success-foreground: 220 15% 10%;
+
+    --warning: 45 93% 57%;
+    --warning-foreground: 220 15% 10%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 207 92% 56%;
+
+    /* Menu colors dark */
+    --menu-text: 50 20% 95%;
+    --menu-text-hover: 207 92% 56%;
+    --menu-icon: 220 10% 60%;
+    --menu-icon-hover: 207 92% 56%;
+    --menu-section-label: 220 10% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Başlık Stilleri */
+  h1,
+  h2,
+  h3 {
+    color: hsl(var(--dark-gray));
+    font-weight: 700;
+  }
+
+  h4,
+  h5,
+  h6 {
+    color: hsl(var(--foggy-black));
+    font-weight: 600;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Diamond Visa Utility Classes */
+.text-diamond-blue {
+  color: hsl(var(--diamond-blue));
+}
+
+.bg-diamond-blue {
+  background-color: hsl(var(--diamond-blue));
+}
+
+.text-diamond-gold {
+  color: hsl(var(--diamond-gold));
+}
+
+.bg-diamond-gold {
+  background-color: hsl(var(--diamond-gold));
+}
+
+.bg-satin-white {
+  background-color: hsl(var(--satin-white));
+}
+
+.text-foggy-black {
+  color: hsl(var(--foggy-black));
+}
+
+.text-dark-gray {
+  color: hsl(var(--dark-gray));
+}
+
+/* Gradient Utilities */
+.gradient-diamond {
+  background: linear-gradient(135deg, hsl(207 92% 46%) 0%, hsl(207 92% 36%) 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, hsl(45 93% 47%) 0%, hsl(35 93% 42%) 100%);
+}
+
+/* Sidebar menu styling */
+.sidebar-menu-text {
+  color: hsl(var(--menu-text)) !important;
+}
+
+.sidebar-menu-icon {
+  color: hsl(var(--menu-icon)) !important;
+}
+
+.sidebar-menu-item:hover .sidebar-menu-text {
+  color: hsl(var(--menu-text-hover)) !important;
+}
+
+.sidebar-menu-item:hover .sidebar-menu-icon {
+  color: hsl(var(--menu-icon-hover)) !important;
+}
+
+.sidebar-section-label {
+  color: hsl(var(--menu-section-label)) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Transitions */
+.transition-diamond {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* Button shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  transform: rotate(45deg) translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-shine:hover::after {
+  transform: rotate(45deg) translateX(100%);
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease forwards;
+}
+
+/* Stagger Animation */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+.stagger-5 {
+  animation-delay: 0.5s;
+}
