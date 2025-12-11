@@ -8,8 +8,8 @@ export const COMPANY_INFO = {
 
   contact: {
     email: "info@diamondvisa.com",
-    phone: "+90 212 555 0000",
-    whatsapp: "+90 532 555 0000",
+    phone: "+90 0531 841 75 43",
+    whatsapp: "+90 0531 841 75 43",
     address: "Levent, Istanbul, Turkiye",
   },
 
